@@ -9,30 +9,6 @@
                          'f f ';
 }
 
-.Header img {
-    width: 15%;
-    margin-top: 15px;
-}
-
-.Article img {
-    width: 100%;
-}
-
-.Header {
-    grid-area: h;
-}
-
-.Nav {
-    grid-area: n;
-    background-color: #e4184b;
-    color:white;
-}
-
-.Article {
-    grid-area: a;
-    background-color: darkcyan;
-}
-
 .Footer {
     grid-area: f;
    }
