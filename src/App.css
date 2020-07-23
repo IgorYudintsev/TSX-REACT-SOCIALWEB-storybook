@@ -1,6 +1,4 @@
 .Wrapper {
-
-    text-align: center;
     display: grid;
     grid-template-rows: 1fr 7fr 1fr;
     grid-template-columns: 2fr 8fr;
@@ -11,4 +9,4 @@
 
 .Footer {
     grid-area: f;
-   }
+}
