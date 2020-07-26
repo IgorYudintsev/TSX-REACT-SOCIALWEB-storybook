@@ -10,3 +10,8 @@
 .Footer {
     grid-area: f;
 }
+
+.app-wrapper-content{
+    grid-area: a;
+    background-color: darkcyan;
+}
