@@ -7,7 +7,6 @@ import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Body} from "./components/Body/Body";
 
-
 function App() {
     return (
         <BrowserRouter>
