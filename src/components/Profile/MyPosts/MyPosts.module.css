@@ -1,3 +1,11 @@
 .item{
     color:black;
 }
+
+.content{
+    padding-left: 30px;
+    padding-top: 30px;
+}
+.message{
+    padding-top: 20px;
+}

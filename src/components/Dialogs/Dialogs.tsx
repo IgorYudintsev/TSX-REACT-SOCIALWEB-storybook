@@ -8,10 +8,20 @@ type DialogItemType = {
 }
 
 const DialogItem = (props: DialogItemType) => {
+    let path = "/dialogs/" + props.id;
     return (
         <div className={classes.dialog + " " + classes.active}>
-            <NavLink to={"/dialogs/" + props.id}>{props.name}</NavLink>
+            <NavLink to={path}>{props.name}</NavLink>
         </div>
+    )
+}
+
+type MessageType = {
+    message: string
+}
+const Message = (props: MessageType) => {
+    return (
+        <div className={classes.message}>{props.message}</div>
     )
 }
 
@@ -21,20 +31,13 @@ export const Dialogs = () => {
         <div className={classes.dialogs}>
             <div className={classes.dialogsItem}>
                 <DialogItem name='Igor' id={'1'}/>
-                {/*<div className={classes.dialog +" "+classes.active}>*/}
-                {/*    <NavLink to="/dialogs/1">Igor</NavLink>*/}
-                {/*</div>*/}
-                {/*<div className={classes.dialog}>*/}
-                {/*    <NavLink to="/dialogs/2">Sasha</NavLink>*/}
-                {/*</div>*/}
-                {/*<div className={classes.dialog}>*/}
-                {/*    <NavLink to="/dialogs/3">Nadia</NavLink>*/}
-                {/*</div>*/}
+                <DialogItem name='Sasha' id={'2'}/>
+                <DialogItem name='Nadia' id={'3'}/>
             </div>
             <div className={classes.messages}>
-                <div className={classes.message}>Hi</div>
-                <div className={classes.message}>How are you?</div>
-                <div className={classes.message}>Hellow</div>
+                <Message message={'Hi'}/>
+                <Message message={'How are you?'}/>
+                <Message message={'Hellow'}/>
             </div>
         </div>
     )
