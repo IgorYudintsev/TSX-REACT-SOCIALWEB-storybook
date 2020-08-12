@@ -3,7 +3,8 @@ import classes from './Post.module.css';
 import avatar from './../../../img/avatar.png'
 
 type messageType = {
-    message: string;
+    message: string
+    likesCount:number
 }
 
 export let Post = (props: messageType) => {
@@ -13,7 +14,7 @@ export let Post = (props: messageType) => {
                 <img src={avatar}/>
                 {props.message}
             </div>
-            <div>like</div>
+            <div>Like:{props.likesCount}</div>
         </div>
     )
 }
