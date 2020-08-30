@@ -6,32 +6,13 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Body} from "./components/Body/Body";
+import {stateType} from "./redux/state";
 
-type generalType={
-    postData: Array<InArray>
-    DialogData:Array<InDialogDataType>
-    MessagesData:Array<InMessagesDataType>
+type appStateType = {
+    state: stateType
 }
 
- type InDialogDataType = {
-    id: number
-    name: string
-}
- type InMessagesDataType = {
-    id: number
-    message: string
-}
-
-
-export type InArray = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-
-function App(props:generalType) {
-
+function App(props: appStateType) {
     return (
         <BrowserRouter>
             <div className={'Wrapper'}>
@@ -39,10 +20,12 @@ function App(props:generalType) {
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
                     <Route exact path='/' component={Body}/>
-                    {/*<Route path='/dialogs' component={() => <Dialogs />}/>*/}
-                    <Route path='/dialogs' component={() => <Dialogs DialogData={props.DialogData} MessagesData={props.MessagesData}/>}/>
-                    {/*<Route path='/profile' component={() => <Profile postData={props.postData}/>}/>*/}
-                    <Route path='/profile' component={() => <Profile postData={props.postData}/>}/>
+                    <Route path='/dialogs'
+                           component={() => <Dialogs
+                               state={props.state.dialogsPage}
+                           />
+                           }/>
+                    <Route path='/profile' component={() => <Profile state={props.state.profilePage}/>}/>
                 </div>
                 <div className={'Footer'}>Footer</div>
             </div>
@@ -61,13 +44,13 @@ export default App;
 // import {Profile} from "./components/Profile/Profile";
 // import {Dialogs} from "./components/Dialogs/Dialogs";
 // import {Body} from "./components/Body/Body";
-// import {InArray} from "./components/Profile/MyPosts/MyPosts";
+// import {stateType} from "./redux/state";
 //
-// function App() {
-//     let postData:Array<InArray>=[
-//         {id:1,message:'Hellow',likesCount:12},
-//         {id:2,message:'It\'s my first post!',likesCount:11}
-//     ]
+// type appStateType = {
+//     state: stateType
+// }
+//
+// function App(props: appStateType) {
 //     return (
 //         <BrowserRouter>
 //             <div className={'Wrapper'}>
@@ -75,8 +58,12 @@ export default App;
 //                 <Navbar/>
 //                 <div className={'app-wrapper-content'}>
 //                     <Route exact path='/' component={Body}/>
-//                     <Route path='/dialogs' component={() => <Dialogs/>}/>
-//                     <Route path='/profile' component={() => <Profile postData={postData}/>}/>
+//                     <Route path='/dialogs'
+//                            component={() => <Dialogs
+//                                state={props.state.dialogsPage}
+//                            />
+//                            }/>
+//                     <Route path='/profile' component={() => <Profile postData={props.state.profilePage.posts}/>}/>
 //                 </div>
 //                 <div className={'Footer'}>Footer</div>
 //             </div>

@@ -1,44 +1,38 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
-import {NavLink} from "react-router-dom";
+
 import {DialogItems} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
-import {InArray} from "../../App";
 
-type generalType = {
-    DialogData: Array<InDialogDataType>
-    MessagesData: Array<InMessagesDataType>
+export type dialogsStateType = {
+    state: generalType
 }
-export type InDialogDataType = {
-    id: number
-    name: string
+
+export type generalType = {
+    messages: Array<MessagesType>
+    dialogs: Array<DialogsType>
 }
-export type InMessagesDataType = {
+
+export type MessagesType = {
     id: number
     message: string
 }
+export type DialogsType = {
+    id: number
+    name: string
+}
 
-export const Dialogs = (props: generalType) => {
-    // const DialogData: Array<InDialogDataType> = [
-    //     {id: 1, name: 'Igor'},
-    //     {id: 2, name: 'Sasha'},
-    //     {id: 3, name: 'Nadia'},
-    // ]
-    // const MessagesData: Array<InMessagesDataType> = [
-    //     {id: 1, message: 'Hi'},
-    //     {id: 2, message: 'How are you?'},
-    //     {id: 3, message: 'Hellow'},
-    // ]
+export const Dialogs = (props: dialogsStateType) => {
+
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItem}>
-                {props.DialogData.map(m =>
+                {props.state.dialogs.map(m =>
                     <DialogItems name={m.name} id={m.name}/>
                 )}
-
             </div>
             <div className={classes.messages}>
-                {props.MessagesData.map(m => <Message message={m.message}/>)}
+                {props.state.messages.map(m => <Message message={m.message}/>)}
             </div>
         </div>
     )
@@ -46,45 +40,36 @@ export const Dialogs = (props: generalType) => {
 //=======================
 // import React from 'react';
 // import classes from './Dialogs.module.css';
-// import {NavLink} from "react-router-dom";
+//
 // import {DialogItems} from './DialogItem/DialogItem'
 // import {Message} from './Message/Message'
-// import {InArray} from "../../App";
 //
-// type generalType = {
-//     DialogData: Array<InDialogDataType>
-//     MessagesData: Array<InMessagesDataType>
+// export type generalType = {
+//     MessagesData: Array<MessagesType>
+//     DialogData: Array<DialogsType>
 // }
-// type InDialogDataType = {
-//     id: number
-//     name: string
-// }
-// type InMessagesDataType = {
+//
+// export type MessagesType = {
 //     id: number
 //     message: string
 // }
+// export type DialogsType = {
+//     id: number
+//     name: string
+// }
 //
 // export const Dialogs = (props: generalType) => {
-//     // const DialogData: Array<InDialogDataType> = [
-//     //     {id: 1, name: 'Igor'},
-//     //     {id: 2, name: 'Sasha'},
-//     //     {id: 3, name: 'Nadia'},
-//     // ]
-//     // const MessagesData: Array<InMessagesDataType> = [
-//     //     {id: 1, message: 'Hi'},
-//     //     {id: 2, message: 'How are you?'},
-//     //     {id: 3, message: 'Hellow'},
-//     // ]
+//
 //     return (
 //         <div className={classes.dialogs}>
 //             <div className={classes.dialogsItem}>
-//                 {DialogData.map(m =>
+//                 {props.DialogData.map(m =>
 //                     <DialogItems name={m.name} id={m.name}/>
 //                 )}
 //
 //             </div>
 //             <div className={classes.messages}>
-//                 {MessagesData.map(m => <Message message={m.message}/>)}
+//                 {props.MessagesData.map(m => <Message message={m.message}/>)}
 //             </div>
 //         </div>
 //     )

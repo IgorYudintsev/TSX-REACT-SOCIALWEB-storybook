@@ -2,9 +2,13 @@ import React from "react";
 import classes from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {generalType} from "../Dialogs/Dialogs";
 
+export type profileStateType = {
+    state: postDataType
+}
 type postDataType = {
-    postData: Array<InArray>
+    posts: Array<InArray>
 }
 export type InArray = {
     id: number
@@ -12,12 +16,11 @@ export type InArray = {
     likesCount: number
 }
 
-export let Profile = (props:postDataType) => {
+export let Profile = (props:profileStateType) => {
     return (
         <div className={'content'}>
             <ProfileInfo/>
-            <MyPosts postData={props.postData}/>
+            <MyPosts postData={props.state.posts}/>
         </div>
-
     )
 }
