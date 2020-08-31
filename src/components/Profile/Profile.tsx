@@ -6,6 +6,7 @@ import {generalType} from "../Dialogs/Dialogs";
 
 export type profileStateType = {
     state: postDataType
+    addPost:(postMessage: string)=>void
 }
 type postDataType = {
     posts: Array<InArray>
@@ -20,7 +21,7 @@ export let Profile = (props:profileStateType) => {
     return (
         <div className={'content'}>
             <ProfileInfo/>
-            <MyPosts postData={props.state.posts}/>
+            <MyPosts postData={props.state.posts}  addPost={props.addPost}/>
         </div>
     )
 }

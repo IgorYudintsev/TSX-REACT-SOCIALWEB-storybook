@@ -4,6 +4,7 @@ import classes from './MyPosts.module.css';
 
 type postDataType = {
     postData: Array<InArray>
+    addPost:(postMessage: string)=>void
 }
 export type InArray = {
     id: number
@@ -18,7 +19,10 @@ type newPostElementType={
 export let MyPosts = (props: postDataType) => {
     let newPostElement=React.createRef<HTMLTextAreaElement>();
     const addPost=()=>{
-        alert(newPostElement.current?.value)
+        // alert(newPostElement.current?.value)
+        if(newPostElement.current?.value){
+            props.addPost(newPostElement.current?.value)
+        }
     }
     return (
         <div className={classes.content}>
