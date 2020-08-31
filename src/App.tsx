@@ -14,22 +14,20 @@ type appStateType = {
 
 function App(props: appStateType) {
     return (
-        <BrowserRouter>
-            <div className={'Wrapper'}>
-                <Header/>
-                <Navbar/>
-                <div className={'app-wrapper-content'}>
-                    <Route exact path='/' component={Body}/>
-                    <Route path='/dialogs'
-                           component={() => <Dialogs
-                               state={props.state.dialogsPage}
-                           />
-                           }/>
-                    <Route path='/profile' component={() => <Profile state={props.state.profilePage}/>}/>
-                </div>
-                <div className={'Footer'}>Footer</div>
+        <div className={'Wrapper'}>
+            <Header/>
+            <Navbar/>
+            <div className={'app-wrapper-content'}>
+                <Route exact path='/' component={Body}/>
+                <Route path='/dialogs'
+                       component={() => <Dialogs
+                           state={props.state.dialogsPage}
+                       />
+                       }/>
+                <Route path='/profile' component={() => <Profile state={props.state.profilePage}/>}/>
             </div>
-        </BrowserRouter>
+            <div className={'Footer'}>Footer</div>
+        </div>
     );
 }
 

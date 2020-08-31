@@ -11,19 +11,26 @@ export type InArray = {
     likesCount: number
 }
 
+type newPostElementType={
+    newPostElement:string
+}
+
 export let MyPosts = (props: postDataType) => {
+    let newPostElement=React.createRef<HTMLTextAreaElement>();
+    const addPost=()=>{
+        alert(newPostElement.current?.value)
+    }
     return (
         <div className={classes.content}>
-            <textarea></textarea>
+            <textarea ref={newPostElement}></textarea>
             <div>
-                <button>Add post</button>
+                <button onClick={addPost}>Add post</button>
             </div>
 
             <div className={classes.message}>
                 {props.postData.map(m =>
                     <Post message={m.message} likesCount={m.likesCount}/>
-                )
-                }
+                )}
             </div>
         </div>
     )
