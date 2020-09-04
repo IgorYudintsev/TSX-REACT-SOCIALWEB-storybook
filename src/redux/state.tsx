@@ -1,6 +1,9 @@
-import React from 'react';
-import {rerenderEntireTree} from "../Render";
 
+import React from 'react';
+
+let rerenderEntireTree=(state: stateType)=>{
+    console.log('state was changed')
+}
 
 export type stateType = {
     profilePage: profilePageType
@@ -66,12 +69,12 @@ export let addPost = () => {
     state.profilePage.newPostText='';
     rerenderEntireTree(state);
 }
-
 export let updateNewPostText = (newText: string) => {
     state.profilePage.newPostText=newText
-    debugger
     rerenderEntireTree(state);
-    // console.log(newText)
+}
+export const subscribe=(observer:(state: stateType)=>void)=>{
+    rerenderEntireTree=observer;
 }
 
 export default state;
