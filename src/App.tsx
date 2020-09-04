@@ -10,7 +10,8 @@ import {stateType} from "./redux/state";
 
 type appStateType = {
     state: stateType
-    addPost:(postMessage: string)=>void
+    addPost:()=>void
+    updateNewPostText:(newText: string)=>void
 }
 
 function App(props: appStateType) {
@@ -26,8 +27,9 @@ function App(props: appStateType) {
                        />
                        }/>
                 <Route path='/profile' component={() => <Profile
-                    state={props.state.profilePage}
+                    profile={props.state.profilePage}
                     addPost={props.addPost}
+                    updateNewPostText={props.updateNewPostText}
                 />}/>
             </div>
             <div className={'Footer'}>Footer</div>
@@ -36,4 +38,3 @@ function App(props: appStateType) {
 }
 
 export default App;
-;

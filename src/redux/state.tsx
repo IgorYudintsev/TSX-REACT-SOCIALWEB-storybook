@@ -1,5 +1,5 @@
 import React from 'react';
-import { rerenderEntireTree} from "../Render";
+import {rerenderEntireTree} from "../Render";
 
 
 export type stateType = {
@@ -14,6 +14,7 @@ export type messagesPageType = {
 
 export type profilePageType = {
     posts: Array<postsType>
+    newPostText: string
 }
 
 export type postsType = {
@@ -34,8 +35,9 @@ let state: stateType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi', likesCount: 10},
-            {id: 2, message: 'How are you?', likesCount: 100},
-        ]
+            {id: 2, message: 'How are you?', likesCount: 100}
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         messages: [
@@ -55,11 +57,21 @@ let state: stateType = {
     }
 }
 
-export let addPost = (postMessage: string) => {
-    let newPosts = {id: 5, message: postMessage, likesCount: 0};
-    state.profilePage.posts.push(newPosts)
+export let addPost = () => {
+    let newPosts = {
+        id: 5,
+        message: state.profilePage.newPostText,
+        likesCount: 0};
+    state.profilePage.posts.push(newPosts);
+    state.profilePage.newPostText='';
     rerenderEntireTree(state);
 }
 
+export let updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText=newText
+    debugger
+    rerenderEntireTree(state);
+    // console.log(newText)
+}
 
 export default state;

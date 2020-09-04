@@ -1,10 +1,12 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {Post} from "./Post/Post";
 import classes from './MyPosts.module.css';
 
 type postDataType = {
     postData: Array<InArray>
-    addPost:(postMessage: string)=>void
+    newPostText: string
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 export type InArray = {
     id: number
@@ -12,31 +14,89 @@ export type InArray = {
     likesCount: number
 }
 
-type newPostElementType={
-    newPostElement:string
-}
 
 export let MyPosts = (props: postDataType) => {
-    let newPostElement=React.createRef<HTMLTextAreaElement>();
-    const addPost=()=>{
-        if(newPostElement.current?.value){
-            props.addPost(newPostElement.current?.value);
-            newPostElement.current.value='';
-        }
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
 
+    const addPost = () => {
+        let text = newPostElement.current?.value;
+        props.addPost();
     }
+
+    let onPostChange = (event: ChangeEvent<HTMLInputElement>) => {
+        props.updateNewPostText(event.currentTarget.value)
+    }
+
     return (
         <div className={classes.content}>
-            <textarea ref={newPostElement}></textarea>
-            <div>
-                <button onClick={addPost}>Add post</button>
-            </div>
+            <form>
+                <input type={'text'}
+                       autoFocus
+                       onChange={onPostChange}
+                       value={props.newPostText}
+                       placeholder={'Add message'}
+                />
+                <div>
+                    <button onClick={addPost}>Add post</button>
+                </div>
+            </form>
 
             <div className={classes.message}>
-                {props.postData.map(m =>
-                    <Post message={m.message} likesCount={m.likesCount}/>
+                {props.postData.map(m => <Post message={m.message} likesCount={m.likesCount}/>
                 )}
             </div>
         </div>
     )
 }
+
+//======================================================
+// import React, {ChangeEvent} from "react";
+// import {Post} from "./Post/Post";
+// import classes from './MyPosts.module.css';
+//
+// type postDataType = {
+//     postData: Array<InArray>
+//     newPostText: string
+//     addPost: () => void
+//     updateNewPostText: (newText: string) => void
+// }
+// export type InArray = {
+//     id: number
+//     message: string
+//     likesCount: number
+// }
+//
+//
+// export let MyPosts = (props: postDataType) => {
+//     let newPostElement = React.createRef<HTMLTextAreaElement>();
+//
+//     const addPost = () => {
+//         let text = newPostElement.current?.value;
+//         props.addPost();
+//     }
+//
+//     let onPostChange = (event: ChangeEvent<HTMLInputElement>) => {
+//         props.updateNewPostText(event.currentTarget.value)
+//     }
+//
+//     return (
+//         <div className={classes.content}>
+//             <div>
+//                 <input
+//                     autoFocus
+//                     onChange={onPostChange}
+//                     value={props.newPostText}
+//                     placeholder={'Add message'}
+//                 />
+//                 <div>
+//                     <button onClick={addPost}>Add post</button>
+//                 </div>
+//             </div>
+//
+//             <div className={classes.message}>
+//                 {props.postData.map(m => <Post message={m.message} likesCount={m.likesCount}/>
+//                 )}
+//             </div>
+//         </div>
+//     )
+// }
