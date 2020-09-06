@@ -6,7 +6,10 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Body} from "./components/Body/Body";
-import store, {stateType,ActionsTypes} from "./redux/state";
+import store, {ActionsTypes, stateType} from "./redux/state";
+
+
+
 
 type appStateType = {
     state: stateType

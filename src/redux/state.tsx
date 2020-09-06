@@ -5,13 +5,13 @@ export type storeType = {
     _callSubsriber: (state: stateType) => void
     subscribe: (observer: (state: stateType) => void) => void
     getState: () => stateType
-    dispatch:(action:ActionsTypes)=>void
+    dispatch: (action: ActionsTypes) => void
 }
 export type addPostActionType={
     type:'ADD-POST'
 }
 export type updateNewPostTextActionType={
-    type:'UPDATE-NEW-POST-TEXT'
+    type:'UPDATE-NEW-POST-TEXT',
     newText:string
 }
 export type ActionsTypes=addPostActionType|updateNewPostTextActionType
@@ -40,6 +40,9 @@ export type MessagesType = {
     id: number
     message: string
 }
+
+export const addPost = 'ADD-POST';
+export const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
 
 let store: storeType = {
     _state: {
@@ -76,9 +79,8 @@ let store: storeType = {
     getState: function () {
         return this._state;
     },
-    //переводится-отправить.Вставляем сюда updateNewPost и AddPost
     dispatch: function (action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === addPost) {
             let newPosts = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -87,12 +89,23 @@ let store: storeType = {
             this._state.profilePage.posts.push(newPosts);
             this._state.profilePage.newPostText = '';
             this._callSubsriber(this._state);
-        }else if(action.type==='UPDATE-NEW-POST-TEXT'){
-            this._state.profilePage.newPostText = action.newText//т.к в функции Update
-            //получал newText-то мы его вписали в action
+        } else if (action.type === updateNewPostText) {
+            this._state.profilePage.newPostText = action.newText
             this._callSubsriber(this._state);
         }
     }
+}
+
+export const addPostActionCreator = () => {
+    return {
+        type: addPost
+    }as const//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
+export const updateNewPostActionCreator = (text: string) => {
+    return {
+        type: updateNewPostText,
+        newText: text
+    }as const//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
 export default store;
