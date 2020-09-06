@@ -6,12 +6,11 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Body} from "./components/Body/Body";
-import {stateType} from "./redux/state";
+import store, {stateType,ActionsTypes} from "./redux/state";
 
 type appStateType = {
     state: stateType
-    addPost:()=>void
-    updateNewPostText:(newText: string)=>void
+    dispatch:(action:ActionsTypes)=>void
 }
 
 function App(props: appStateType) {
@@ -28,8 +27,7 @@ function App(props: appStateType) {
                        }/>
                 <Route path='/profile' component={() => <Profile
                     profile={props.state.profilePage}
-                    addPost={props.addPost}
-                    updateNewPostText={props.updateNewPostText}
+                    dispatch={store.dispatch.bind(store)}
                 />}/>
             </div>
             <div className={'Footer'}>Footer</div>

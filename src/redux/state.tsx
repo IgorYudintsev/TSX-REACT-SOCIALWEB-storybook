@@ -1,12 +1,20 @@
 import React from 'react';
+
 export type storeType = {
     _state: stateType
-    getState: () => stateType
     _callSubsriber: (state: stateType) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
     subscribe: (observer: (state: stateType) => void) => void
-}//типизация storage
+    getState: () => stateType
+    dispatch:(action:ActionsTypes)=>void
+}
+export type addPostActionType={
+    type:'ADD-POST'
+}
+export type updateNewPostTextActionType={
+    type:'UPDATE-NEW-POST-TEXT'
+    newText:string
+}
+export type ActionsTypes=addPostActionType|updateNewPostTextActionType
 export type stateType = {
     profilePage: profilePageType
     dialogsPage: messagesPageType
@@ -58,33 +66,33 @@ let store: storeType = {
                 {id: 5, name: 'Nadzeika'},
             ]
         }
-    },//стейт
-    getState: function () {
-        return this._state;
-    },//выдача стейта
+    },
     _callSubsriber: function (state: stateType) {
         console.log('state was changed')
     },
-    addPost: function () {//добавление поста
-        let newPosts = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.posts.push(newPosts);
-        this._state.profilePage.newPostText = '';
-        this._callSubsriber(this._state);
-    },
-    updateNewPostText: function (newText: string) {//onChange
-        this._state.profilePage.newPostText = newText
-        this._callSubsriber(this._state);
-    },
     subscribe: function (observer: (state: stateType) => void) {
         this._callSubsriber = observer;
-    }//в index.tsx мы запустили эту функцию
-    //мы передали сюда rerenderEntireTree(со стейтом внутри)
-    //и сейчас _callSubsriber в котором левый мусор станет
-    // rerenderEntireTree(со стейтом внутри)
+    },
+    getState: function () {
+        return this._state;
+    },
+    //переводится-отправить.Вставляем сюда updateNewPost и AddPost
+    dispatch: function (action) {
+        if (action.type === 'ADD-POST') {
+            let newPosts = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.posts.push(newPosts);
+            this._state.profilePage.newPostText = '';
+            this._callSubsriber(this._state);
+        }else if(action.type==='UPDATE-NEW-POST-TEXT'){
+            this._state.profilePage.newPostText = action.newText//т.к в функции Update
+            //получал newText-то мы его вписали в action
+            this._callSubsriber(this._state);
+        }
+    }
 }
 
 export default store;

@@ -11,17 +11,17 @@ let rerenderEntireTree=(state:stateType)=>{
         <React.StrictMode>
             <BrowserRouter>
                 <App state={store.getState()}
-                     addPost={store.addPost.bind(store)}//bind-следит за this
-                     updateNewPostText={store.updateNewPostText.bind(store)}
+                     dispatch={store.dispatch.bind(store)}
+                    //вместо AddPost и updateNewPostText
                 />
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
-rerenderEntireTree(store.getState());//запускаем перерисовку->т.е. стр.9
-store.subscribe(rerenderEntireTree);//отправляет rerenderEntireTree в state.tsx
-//чтобы там можно было перезагрузить rerenderEntireTree из state.tsx
+rerenderEntireTree(store.getState());
+store.subscribe(rerenderEntireTree);
+
 
 
 serviceWorker.unregister();
