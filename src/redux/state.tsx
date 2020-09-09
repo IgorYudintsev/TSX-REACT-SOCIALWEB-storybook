@@ -1,4 +1,5 @@
 import React from 'react';
+import {addPost, profileReducer, updateNewPostText} from "./profile-reducer";
 
 export type storeType = {
     _state: stateType
@@ -41,8 +42,8 @@ export type MessagesType = {
     message: string
 }
 
-export const addPost = 'ADD-POST';
-export const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
+// export const addPost = 'ADD-POST';
+// export const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
 
 let store: storeType = {
     _state: {
@@ -80,32 +81,10 @@ let store: storeType = {
         return this._state;
     },
     dispatch: function (action) {
-        if (action.type === addPost) {
-            let newPosts = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            };
-            this._state.profilePage.posts.push(newPosts);
-            this._state.profilePage.newPostText = '';
-            this._callSubsriber(this._state);
-        } else if (action.type === updateNewPostText) {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubsriber(this._state);
-        }
+        profileReducer(store.getState(),action)
+        this._callSubsriber(this._state)
     }
 }
 
-export const addPostActionCreator = () => {
-    return {
-        type: addPost
-    }as const//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-}
-export const updateNewPostActionCreator = (text: string) => {
-    return {
-        type: updateNewPostText,
-        newText: text
-    }as const//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-}
 
 export default store;
